@@ -8,17 +8,17 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 public class AjouterSociete extends AppCompatActivity {
-    EditText e1,e2,e3;
+    EditText e1, e2, e3;
     Mydb db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ajouter_societe);
-        db=new Mydb(this);
-        e1=findViewById(R.id.ed1);
-        e2=findViewById(R.id.ed2);
-        e3=findViewById(R.id.ed3);
+        db = new Mydb(this);
+        e1 = findViewById(R.id.ed1);
+        e2 = findViewById(R.id.ed2);
+        e3 = findViewById(R.id.ed3);
     }
 
     public void annuler(View view) {
@@ -32,9 +32,11 @@ public class AjouterSociete extends AppCompatActivity {
         p.setSecteurActivité(e2.getText().toString());
         p.setNombreemployé(Integer.valueOf(e3.getText().toString()));
 
-        if(Mydb.ajouter_societe(db.getWritableDatabase(),p)==-1)
+        if (Mydb.ajouter_societe(db.getWritableDatabase(),p) == -1){
             Toast.makeText(this, "L'insertion echoue ", Toast.LENGTH_SHORT).show();
-        else
+            return;
+
+        }
             Toast.makeText(this, "Insertion avec succes ", Toast.LENGTH_SHORT).show();
     }
 }

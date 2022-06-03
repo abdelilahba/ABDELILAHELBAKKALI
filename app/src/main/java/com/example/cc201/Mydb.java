@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class Mydb extends SQLiteOpenHelper {
     public static String DB_NAME = " societes.db";
-    public static String T_NAME = " societe";
+    public static String TABLE_NAME = " societe";
     public static String COL1 = "id";
     public static String COL2 = "raisonsociale";
     public static String COL3 = "Secteur_activite";
@@ -24,7 +24,7 @@ public class Mydb extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        String req = "CREATE TABLE " + T_NAME + "(" + COL1 + " integer primary key autoincrement," + COL2 + " text," + COL3 + " text," + COL4 + "integer)";
+        String req = "CREATE TABLE " + TABLE_NAME + "(" + COL1 + " integer primary key autoincrement," + COL2 + " text," + COL3 + " text," + COL4 + "integer)";
         sqLiteDatabase.execSQL(req);
 
 
@@ -32,6 +32,9 @@ public class Mydb extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
+        String sql= "DROP TABLE " + TABLE_NAME;
+        sqLiteDatabase.execSQL(sql);
+        onCreate(sqLiteDatabase);
 
     }
 
@@ -40,7 +43,7 @@ public class Mydb extends SQLiteOpenHelper {
         ct.put(COL2, e.getNom());
         ct.put(COL3, e.getSecteurActivité());
         ct.put(COL4, e.getNombreemployé());
-        return sqLiteDatabase.insert(T_NAME, null, ct);
+        return sqLiteDatabase.insert(TABLE_NAME, null, ct);
     }
 
     public static long modifier_societe(SQLiteDatabase sqLiteDatabase, Societe e) {
@@ -48,17 +51,17 @@ public class Mydb extends SQLiteOpenHelper {
         c.put(COL2, e.getNom());
         c.put(COL3, e.getSecteurActivité());
         c.put(COL4, e.getNombreemployé());
-        return sqLiteDatabase.update(T_NAME, c, "id=" + e.getId(), null);
+        return sqLiteDatabase.update(TABLE_NAME, c, "id=" + e.getId(), null);
     }
 
     public static long supprime_societe(SQLiteDatabase sqLiteDatabase, int id) {
-        return sqLiteDatabase.delete(T_NAME, "id=" + id, null);
+        return sqLiteDatabase.delete(TABLE_NAME, "id=" + id, null);
     }
 
     public static ArrayList<Societe> recuperertous_societe(SQLiteDatabase db) {
         ArrayList<Societe> societes = new ArrayList<>();
 
-        Cursor cur = db.rawQuery("SELECT * FROM " + T_NAME, null);
+        Cursor cur = db.rawQuery("SELECT * FROM " + TABLE_NAME, null);
 
         while (cur.moveToNext()) {
             Societe e = new Societe();
@@ -73,7 +76,7 @@ public class Mydb extends SQLiteOpenHelper {
     public static Societe recupereunesocite(SQLiteDatabase sqLiteDatabase, int id){
         Societe s = null;
 
-        Cursor cur = sqLiteDatabase.rawQuery("SELECT * FROM " + T_NAME + " WHERE id = " + id,null);
+        Cursor cur = sqLiteDatabase.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE id = " + id,null);
 
         if(cur.moveToNext()){
             s = new Societe();
