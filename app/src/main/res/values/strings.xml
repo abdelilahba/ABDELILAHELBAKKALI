@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">CC201</string>
+    <string name="btnajout">AJOUTE UNE SOCIETE</string>
+    <string name="btnedit">EDIT UNE SOCIETE</string>
+    <string name="btnlist">LIST EDETOUSLES SOCIETES</string>
+    <string name="btnanuuler">Annuler</string>
+    <string name="ajoutersoc">Ajouter</string>
+    <string name="editesoc">MODIFIER</string>
+    <string name="suppedit">supprime</string>
+    <string name="hinted1">tapez le nom de la societe</string>
+    <string name="hinted2">tapez le secteur de activity</string>
+    <string name="hinted3">tapez le nombre de employe</string>
+
+
 </resources>
